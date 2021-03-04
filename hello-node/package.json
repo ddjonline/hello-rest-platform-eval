@@ -1,0 +1,19 @@
+{
+  "name": "hello-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+   
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ddjonline/diy-conf-2019.git"
+  },
+  "author": "ddjonline",
+  "license": "ISC"
+}
