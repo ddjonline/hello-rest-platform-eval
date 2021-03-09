@@ -1,0 +1,1 @@
+```mvn -U archetype:generate -DinteractiveMode=false -DarchetypeGroupId=io.helidon.archetypes -DarchetypeArtifactId=helidon-quickstart-mp -DarchetypeVersion=1.0-SNAPSHOT -DgroupId=com.ddjonline.hello -DartifactId=hello-helidon -Dpackage=com.ddjones.hello.helidon.hello```
