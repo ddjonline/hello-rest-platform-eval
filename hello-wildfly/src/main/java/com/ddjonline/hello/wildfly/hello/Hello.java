@@ -15,6 +15,6 @@ public class Hello {
     @GET
 	@Produces("text/plain")
 	public Response doGet() {
-		return Response.ok("Hello DIYConf2019 (" + counter.incrementAndGet() + ")").build();
+		return Response.ok("Hello (" + counter.incrementAndGet() + ")").build();
 	}
 }
