@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.ddjonline.hello</groupId>
+    <artifactId>hello-rest-platform-eval</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <modules>
+        <module>hello-helidon-mp</module>
+        <module>hello-helidon-se</module>
+        <!-- <module>hello-node</module> -->
+        <module>hello-quarkus</module>
+        <module>hello-quarkus-reactive</module>
+        <module>hello-springboot</module>
+        <module>hello-thorntail</module>
+        <module>hello-vertx</module>
+        <module>hello-vertx4</module>
+        <module>hello-vertx4-kt</module>
+        <module>hello-vertx4-kt-coroutines</module>
+        <module>hello-wildfly</module>
+    </modules>
+</project>

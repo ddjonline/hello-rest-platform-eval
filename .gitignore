@@ -1,1 +1,15 @@
 jmeter.log
+
+# General
+.settings/
+.classpath
+.project
+
+# IntelliJ
+.idea
+
+# VSCode
+.VSCode
+
+# Maven
+target/

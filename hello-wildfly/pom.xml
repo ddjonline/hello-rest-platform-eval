@@ -10,8 +10,6 @@
         <root.dir>${project.basedir}</root.dir>
         <!-- <jboss.home.name>WILDFLY_HOME</jboss.home.name> -->
         <version.server.bom>16.0.0.Final</version.server.bom>
-        <maven.compiler.target>11</maven.compiler.target>
-        <maven.compiler.source>11</maven.compiler.source>
         <version.wildfly.maven.plugin>2.0.2.Final</version.wildfly.maven.plugin>
     </properties>
     <dependencyManagement>
