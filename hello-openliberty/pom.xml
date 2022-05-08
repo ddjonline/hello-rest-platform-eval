@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.ddjonline.hello</groupId>
+        <artifactId>hello-rest-platform-eval</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>hello-openliberty</artifactId>
+    <packaging>war</packaging>
+
+    <properties>
+        <jakarta.jakartaee-web-api.version>8.0.0</jakarta.jakartaee-web-api.version>
+        <liberty-maven-plugin.version>3.3-M3</liberty-maven-plugin.version>
+        <maven-war-plugin.version>3.2.3</maven-war-plugin.version>
+        <microprofile.version>3.2</microprofile.version>
+        <openliberty.servlet.version>20.0.0.1</openliberty.servlet.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-web-api</artifactId>
+            <version>${jakarta.jakartaee-web-api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.microprofile</groupId>
+            <artifactId>microprofile</artifactId>
+            <version>${microprofile.version}</version>
+            <type>pom</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.openliberty.features</groupId>
+            <artifactId>servlet-4.0</artifactId>
+            <version>${openliberty.servlet.version}</version>
+            <type>esa</type>
+        </dependency>
+    </dependencies>
+    <build>
+        <!-- <finalName>${project.artifactId}</finalName> -->
+        <plugins>
+            <!-- Enable liberty-maven plugin -->
+            <plugin>
+                <groupId>io.openliberty.tools</groupId>
+                <artifactId>liberty-maven-plugin</artifactId>
+                <version>${liberty-maven-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${maven-war-plugin.version}</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>

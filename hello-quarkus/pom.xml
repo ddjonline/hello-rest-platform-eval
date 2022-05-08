@@ -2,12 +2,19 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.ddjonline.hello</groupId>
+
+  <parent>
+    <groupId>com.ddjonline.hello</groupId>
+    <artifactId>hello-rest-platform-eval</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
   <artifactId>hello-quarkus</artifactId>
-  <version>1.0-SNAPSHOT</version>
+
   <properties>
     <surefire-plugin.version>2.22.0</surefire-plugin.version>
-    <quarkus.version>1.12.1.Final</quarkus.version>
+    <!-- <quarkus.version>1.12.1.Final</quarkus.version> -->
+    <quarkus.version>2.9.0.Final</quarkus.version>
   </properties>
   <dependencyManagement>
     <dependencies>

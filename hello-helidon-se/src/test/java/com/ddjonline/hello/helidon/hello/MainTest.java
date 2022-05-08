@@ -14,60 +14,60 @@ import io.helidon.webserver.WebServer;
 
 public class MainTest {
 
-    private static WebServer webServer;
-    private static WebClient webClient;
+    // private static WebServer webServer;
+    // private static WebClient webClient;
 
-    @BeforeAll
-    public static void startTheServer() throws Exception {
-        webServer = Main.startServer();
+    // @BeforeAll
+    // public static void startTheServer() throws Exception {
+    //     webServer = Main.startServer();
 
-        long timeout = 2000; // 2 seconds should be enough to start the server
-        long now = System.currentTimeMillis();
+    //     long timeout = 2000; // 2 seconds should be enough to start the server
+    //     long now = System.currentTimeMillis();
 
-        while (!webServer.isRunning()) {
-            Thread.sleep(100);
-            if ((System.currentTimeMillis() - now) > timeout) {
-                Assertions.fail("Failed to start webserver");
-            }
-        }
+    //     while (!webServer.isRunning()) {
+    //         Thread.sleep(100);
+    //         if ((System.currentTimeMillis() - now) > timeout) {
+    //             Assertions.fail("Failed to start webserver");
+    //         }
+    //     }
 
-        webClient = WebClient.builder()
-                .baseUri("http://localhost:" + webServer.port())
-                .addMediaSupport(JsonpSupport.create())
-                .build();
-    }
+    //     webClient = WebClient.builder()
+    //             .baseUri("http://localhost:" + webServer.port())
+    //             .addMediaSupport(JsonpSupport.create())
+    //             .build();
+    // }
 
-    @AfterAll
-    public static void stopServer() throws Exception {
-        if (webServer != null) {
-            webServer.shutdown()
-                    .toCompletableFuture()
-                    .get(10, TimeUnit.SECONDS);
-        }
-    }
+    // @AfterAll
+    // public static void stopServer() throws Exception {
+    //     if (webServer != null) {
+    //         webServer.shutdown()
+    //                 .toCompletableFuture()
+    //                 .get(10, TimeUnit.SECONDS);
+    //     }
+    // }
 
-    @Test
-    public void testHelloWorld() throws Exception {
-        webClient.get()
-                .path("/hello")
-                .request(String.class)
-                .thenAccept(string -> Assertions.assertEquals("Hello (1)", string))
-                .toCompletableFuture()
-                .get();
+    // @Test
+    // public void testHelloWorld() throws Exception {
+    //     webClient.get()
+    //             .path("/hello")
+    //             .request(String.class)
+    //             .thenAccept(string -> Assertions.assertEquals("Hello (1)", string))
+    //             .toCompletableFuture()
+    //             .get();
 
-        webClient.get()
-                .path("/health")
-                .request()
-                .thenAccept(response -> Assertions.assertEquals(200, response.status().code()))
-                .toCompletableFuture()
-                .get();
+    //     webClient.get()
+    //             .path("/health")
+    //             .request()
+    //             .thenAccept(response -> Assertions.assertEquals(200, response.status().code()))
+    //             .toCompletableFuture()
+    //             .get();
 
-        webClient.get()
-                .path("/metrics")
-                .request()
-                .thenAccept(response -> Assertions.assertEquals(200, response.status().code()))
-                .toCompletableFuture()
-                .get();
-    }
+    //     webClient.get()
+    //             .path("/metrics")
+    //             .request()
+    //             .thenAccept(response -> Assertions.assertEquals(200, response.status().code()))
+    //             .toCompletableFuture()
+    //             .get();
+    // }
 
 }

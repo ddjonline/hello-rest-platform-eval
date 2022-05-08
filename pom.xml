@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.ddjonline.hello</groupId>
     <artifactId>hello-rest-platform-eval</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -16,6 +16,7 @@
         <module>hello-helidon-mp</module>
         <module>hello-helidon-se</module>
         <!-- <module>hello-node</module> -->
+        <module>hello-openliberty</module>
         <module>hello-quarkus</module>
         <module>hello-quarkus-reactive</module>
         <module>hello-springboot</module>

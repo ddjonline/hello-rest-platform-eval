@@ -3,54 +3,63 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
-        <groupId>io.helidon.applications</groupId>
-        <artifactId>helidon-se</artifactId>
-        <version>2.2.1</version>
-        <relativePath/>
+        <groupId>com.ddjonline.hello</groupId>
+        <artifactId>hello-rest-platform-eval</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
-    <groupId>io.helidon.examples</groupId>
+
     <artifactId>hello-helidon-se</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <name>myproject</name>
+    <name>hello-helidon-se</name>
 
     <properties>
         <mainClass>com.ddjonline.hello.helidon.hello.Main</mainClass>
+        <helidon.version>2.5.0</helidon.version>
+        <junit.version>5.8.2</junit.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>io.helidon.webserver</groupId>
             <artifactId>helidon-webserver</artifactId>
+            <version>${helidon.version}</version>
         </dependency>
         <dependency>
             <groupId>io.helidon.media</groupId>
             <artifactId>helidon-media-jsonp</artifactId>
+            <version>${helidon.version}</version>
         </dependency>
         <dependency>
             <groupId>io.helidon.config</groupId>
             <artifactId>helidon-config-yaml</artifactId>
+            <version>${helidon.version}</version>
         </dependency>
         <dependency>
             <groupId>io.helidon.health</groupId>
             <artifactId>helidon-health</artifactId>
+            <version>${helidon.version}</version>
         </dependency>
         <dependency>
             <groupId>io.helidon.health</groupId>
             <artifactId>helidon-health-checks</artifactId>
+            <version>${helidon.version}</version>
         </dependency>
         <dependency>
             <groupId>io.helidon.metrics</groupId>
             <artifactId>helidon-metrics</artifactId>
+            <version>${helidon.version}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.helidon.webclient</groupId>
             <artifactId>helidon-webclient</artifactId>
+            <version>${helidon.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

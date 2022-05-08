@@ -1,14 +1,22 @@
-<?xml version="1.0" ?>
+<?xml version="1.0"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.ddjonline.hello</groupId>
+    <artifactId>hello-rest-platform-eval</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
   <groupId>com.ddjonline.hello</groupId>
   <artifactId>hello-vertx</artifactId>
-  <version>1.0-SNAPSHOT</version>
+
   <properties>
     <vertx-maven-plugin.version>1.0.23</vertx-maven-plugin.version>
     <vertx.verticle>com.ddjonline.hello.vertx.hello.MainVerticle</vertx.verticle>
     <vertx.version>3.9.5</vertx.version>
   </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
