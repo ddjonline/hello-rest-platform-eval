@@ -20,11 +20,19 @@
         <module>hello-quarkus</module>
         <module>hello-quarkus-reactive</module>
         <module>hello-springboot</module>
-        <module>hello-thorntail</module>
+        <module>hello-springboot-webflux</module>
         <module>hello-vertx</module>
         <module>hello-vertx4</module>
         <module>hello-vertx4-kt</module>
         <module>hello-vertx4-kt-coroutines</module>
         <module>hello-wildfly</module>
     </modules>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>2.4.3</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 </project>

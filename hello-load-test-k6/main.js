@@ -52,7 +52,8 @@ const GET_HEADERS = {
 };
 
 export function testHello() {
-    const response = http.get(`${__ENV.HTTP_PROTO}://${__ENV.BASE_URL}/${__ENV.URL}`, null, GET_HEADERS);
+    // const response = http.get(`${__ENV.HTTP_PROTO}://${__ENV.BASE_URL}/${__ENV.URL}`, null, GET_HEADERS);
+    const response = http.get(`${__ENV.HTTP_PROTO}://${__ENV.BASE_URL}/hello`, null, GET_HEADERS);
 }
 
 export function testNaptime() {
