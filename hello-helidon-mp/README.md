@@ -4,7 +4,7 @@ Command used to create the artifact
     mvn -U archetype:generate -DinteractiveMode=false \
     -DarchetypeGroupId=io.helidon.archetypes \
     -DarchetypeArtifactId=helidon-quickstart-mp \
-    -DarchetypeVersion=2.2.1 \
+    -DarchetypeVersion=3.2.0 \
     -DgroupId=io.helidon.examples \
     -DartifactId=hello-helidon-mp \
     -Dpackage=com.ddjonline.hello.helidon.hello
@@ -19,7 +19,7 @@ Sample Helidon MP project that includes multiple REST operations.
 With JDK11+
 ```bash
 mvn package
-java -jar target/hello-helidon-mp.jar
+java -jar target/com.ddjonline.hello-3.2.0.jar
 ```
 
 ## Exercise the application
