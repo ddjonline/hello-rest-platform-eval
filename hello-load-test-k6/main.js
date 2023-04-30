@@ -23,7 +23,7 @@ export const options = {
         darren_scenario_hello: {
             executor: 'per-vu-iterations',
             exec: "testHello",
-            startTime: '10s', // let the naptime requests stack up for 10 seconds and then attempt hello
+            startTime: '1.5s', // let the naptime requests stack up for 2 seconds and then attempt hello
             gracefulStop: '1m',
             vus: 50,
             iterations: 100,
