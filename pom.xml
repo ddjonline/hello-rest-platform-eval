@@ -20,6 +20,7 @@
         <module>hello-quarkus</module>
         <module>hello-quarkus-reactive</module>
         <module>hello-springboot</module>
+        <module>hello-springboot-3-0</module>
         <module>hello-springboot-webflux</module>
         <module>hello-vertx</module>
         <module>hello-vertx4</module>

@@ -3,16 +3,10 @@
 		 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- <parent>
-        <groupId>com.ddjonline.hello</groupId>
-        <artifactId>hello-rest-platform-eval</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-        <relativePath/>
-    </parent> -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.5</version>
+        <version>3.0.6</version>
     </parent>
 
     <artifactId>hello-springboots-webflux</artifactId>
@@ -22,7 +16,7 @@
 
     <!-- Java 8 -->
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
         <downloadSources>true</downloadSources>
         <downloadJavadocs>true</downloadJavadocs>
     </properties>
