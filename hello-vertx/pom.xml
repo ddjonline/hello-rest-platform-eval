@@ -12,9 +12,13 @@
   <artifactId>hello-vertx</artifactId>
 
   <properties>
-    <vertx-maven-plugin.version>1.0.23</vertx-maven-plugin.version>
+    <maven.compiler.source>25</maven.compiler.source>
+    <maven.compiler.target>25</maven.compiler.target>
+    <maven.compiler.release>25</maven.compiler.release>
+    <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
+    <vertx-maven-plugin.version>2.1.0</vertx-maven-plugin.version>
     <vertx.verticle>com.ddjonline.hello.vertx.hello.MainVerticle</vertx.verticle>
-    <vertx.version>3.9.15</vertx.version>
+    <vertx.version>5.1.5</vertx.version>
   </properties>
 
   <dependencyManagement>
@@ -41,9 +45,21 @@
       <groupId>io.vertx</groupId>
       <artifactId>vertx-rx-java2</artifactId>
     </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-launcher-application</artifactId>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <release>${maven.compiler.release}</release>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>io.reactiverse</groupId>
         <artifactId>vertx-maven-plugin</artifactId>
