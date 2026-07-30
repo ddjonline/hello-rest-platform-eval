@@ -4,7 +4,7 @@ Command used to create the artifact
     mvn -U archetype:generate -DinteractiveMode=false \
     -DarchetypeGroupId=io.helidon.archetypes \
     -DarchetypeArtifactId=helidon-quickstart-mp \
-    -DarchetypeVersion=3.2.0 \
+    -DarchetypeVersion=4.5.1 \
     -DgroupId=io.helidon.examples \
     -DartifactId=hello-helidon-mp \
     -Dpackage=com.ddjonline.hello.helidon.hello
@@ -16,10 +16,10 @@ Sample Helidon MP project that includes multiple REST operations.
 
 ## Build and run
 
-With JDK11+
+With JDK25
 ```bash
 mvn package
-java -jar target/com.ddjonline.hello-3.2.0.jar
+java -jar target/com.ddjonline.hello.jar
 ```
 
 ## Exercise the application
@@ -96,8 +96,8 @@ You can build a native executable in 2 different ways:
 
 ### Local build
 
-Download Graal VM at https://www.graalvm.org/downloads, the version
- currently supported for Helidon is `20.1.0`.
+Download GraalVM at https://www.graalvm.org/downloads, using a GraalVM
+ distribution for JDK 25.
 
 ```
 # Setup the environment
@@ -106,16 +106,16 @@ export GRAALVM_HOME=/path
 mvn package -Pnative-image
 ```
 
-You can also put the Graal VM `bin` directory in your PATH, or pass
- `-DgraalVMHome=/path` to the Maven command.
+You can also put the GraalVM `bin` directory in your PATH.
 
-See https://github.com/oracle/helidon-build-tools/tree/master/helidon-maven-plugin#goal-native-image
- for more information.
+See https://graalvm.github.io/native-build-tools/latest/maven-plugin.html
+ for more information on the `native-image` profile, which uses the
+ GraalVM Native Build Tools Maven plugin.
 
 Start the application:
 
 ```
-./target/hello-helidon-mp
+./target/com.ddjonline.hello
 ```
 
 ### Multi-stage Docker build
@@ -153,13 +153,13 @@ You can build a custom JRI in two different ways:
 mvn package -Pjlink-image
 ```
 
-See https://github.com/oracle/helidon-build-tools/tree/master/helidon-maven-plugin#goal-jlink-image
+See https://github.com/oracle/helidon-build-tools
  for more information.
 
 Start the application:
 
 ```
-./target/hello-helidon-mp-jri/bin/start
+./target/com.ddjonline.hello-jri/bin/start
 ```
 
 ### Multi-stage Docker build

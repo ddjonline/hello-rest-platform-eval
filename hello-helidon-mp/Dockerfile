@@ -1,6 +1,6 @@
 
 # 1st stage, build the app
-FROM maven:3.6-jdk-11 as build
+FROM maven:3.9-eclipse-temurin-25 as build
 
 WORKDIR /helidon
 
@@ -17,13 +17,13 @@ RUN mvn package -DskipTests
 RUN echo "done!"
 
 # 2nd stage, build the runtime image
-FROM openjdk:11-jre-slim
+FROM eclipse-temurin:25-jre
 WORKDIR /helidon
 
 # Copy the binary built in the 1st stage
-COPY --from=build /helidon/target/hello-helidon-mp.jar ./
+COPY --from=build /helidon/target/com.ddjonline.hello.jar ./app.jar
 COPY --from=build /helidon/target/libs ./libs
 
-CMD ["java", "-jar", "hello-helidon-mp.jar"]
+CMD ["java", "-jar", "app.jar"]
 
 EXPOSE 8080

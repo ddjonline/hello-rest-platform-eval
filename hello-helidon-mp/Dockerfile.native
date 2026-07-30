@@ -1,6 +1,18 @@
 
 # 1st stage, build the app
-FROM helidon/jdk11-graalvm-maven:20.2.0 as build
+# Best effort: any GraalVM Community image for JDK 25 works; pin a specific
+# release tag (e.g. 25.0.0-ol9) for reproducible builds.
+FROM ghcr.io/graalvm/graalvm-community:25-ol9 as build
+
+WORKDIR /usr/share
+
+# Install maven
+RUN set -x && \
+    curl -O https://archive.apache.org/dist/maven/maven-3/3.9.11/binaries/apache-maven-3.9.11-bin.tar.gz && \
+    tar -xvf apache-maven-*-bin.tar.gz  && \
+    rm apache-maven-*-bin.tar.gz && \
+    mv apache-maven-* maven && \
+    ln -s /usr/share/maven/bin/mvn /bin/
 
 WORKDIR /helidon
 
@@ -22,8 +34,8 @@ FROM scratch
 WORKDIR /helidon
 
 # Copy the binary built in the 1st stage
-COPY --from=build /helidon/target/hello-helidon-mp .
+COPY --from=build /helidon/target/com.ddjonline.hello ./
 
-ENTRYPOINT ["./hello-helidon-mp"]
+ENTRYPOINT ["./com.ddjonline.hello"]
 
 EXPOSE 8080

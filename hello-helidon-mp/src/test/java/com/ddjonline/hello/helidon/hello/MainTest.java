@@ -1,60 +1,47 @@
 
 package com.ddjonline.hello.helidon.hello;
 
-import jakarta.enterprise.inject.se.SeContainer;
-import jakarta.enterprise.inject.spi.CDI;
-import jakarta.ws.rs.client.Client;
-import jakarta.ws.rs.client.ClientBuilder;
+import io.helidon.microprofile.testing.junit5.HelidonTest;
+
+import jakarta.inject.Inject;
+import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.Response;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import io.helidon.microprofile.server.Server;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
+@HelidonTest
 class MainTest {
 
-    private static Server server;
-    private static String serverUrl;
+    private final WebTarget target;
 
-    @BeforeAll
-    public static void startTheServer() throws Exception {
-        server = Server.create().start();
-        serverUrl = "http://localhost:" + server.port();
+    @Inject
+    MainTest(WebTarget target) {
+        this.target = target;
     }
 
     @Test
     void testHelloWorld() {
-        Client client = ClientBuilder.newClient();
-
-        String text = client
-                .target(serverUrl)
+        String text = target
                 .path("hello")
                 .request()
                 .get(String.class);
-        Assertions.assertEquals("Hello (1)", text,
-                "default message");
+        assertThat("default message", text, is("Hello (1)"));
 
-        Response r = client
-                .target(serverUrl)
+        try (Response r = target
                 .path("metrics")
                 .request()
-                .get();
-        Assertions.assertEquals(200, r.getStatus(), "GET metrics status code");
+                .get()) {
+            assertThat("GET metrics status code", r.getStatus(), is(200));
+        }
 
-        r = client
-                .target(serverUrl)
+        try (Response r = target
                 .path("health")
                 .request()
-                .get();
-        Assertions.assertEquals(200, r.getStatus(), "GET health status code");
-    }
-
-    @AfterAll
-    static void destroyClass() {
-        CDI<Object> current = CDI.current();
-        ((SeContainer) current).close();
+                .get()) {
+            assertThat("GET health status code", r.getStatus(), is(200));
+        }
     }
 }
