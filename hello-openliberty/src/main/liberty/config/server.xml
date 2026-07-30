@@ -1,13 +1,15 @@
-<server description="Baeldung Open Liberty server">
+<server description="hello-openliberty">
     <featureManager>
-        <feature>mpHealth-2.0</feature>
-        <!-- <feature>servlet-4.0</feature> -->
+        <feature>restfulWS-4.0</feature>
+        <feature>cdi-4.1</feature>
+        <feature>mpHealth-4.0</feature>
+        <feature>jsonb-3.0</feature>
     </featureManager>
 
-    <webApplication location="open-liberty.war" contextRoot="/" />
+    <webApplication location="hello-openliberty.war" contextRoot="/" />
 
-    <logging traceSpecification="com.ibm.ws.microprofile.health.*=all" hideMessage="SRVE9967W" />
+    <logging hideMessage="SRVE9967W" />
 
-    <httpEndpoint host="*" httpPort="8080" httpsPort="8080" id="defaultHttpEndpoint" />
+    <httpEndpoint host="*" httpPort="8080" httpsPort="8443" id="defaultHttpEndpoint" />
 
 </server>

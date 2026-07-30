@@ -1,22 +1,16 @@
 ####
-# This Dockerfile is used in order to build a container that runs the Quarkus application in JVM mode
+# Build the app first:
+#   mvn -pl hello-openliberty -am package
 #
-# Before building the docker image run:
+# Build image from hello-openliberty/:
+#   docker build -f src/main/docker/Dockerfile.jvm -t hello-openliberty:java25 .
 #
-# mvn package
-#
-# Then, build the image with:
-#
-# docker build -f src/main/docker/Dockerfile.jvm -t quarkus/hello-quarkus-jvm .
-#
-# Then run the container using:
-#
-# docker run -i --rm -p 8080:8080 quarkus/hello-quarkus-jvm
-#
+# Run:
+#   docker run --rm -p 8080:8080 hello-openliberty:java25
 ###
-FROM fabric8/java-alpine-openjdk8-jre
-ENV JAVA_OPTIONS="-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager"
-ENV AB_ENABLED=jmx_exporter
-COPY target/lib/* /deployments/lib/
-COPY target/*-runner.jar /deployments/app.jar
-ENTRYPOINT [ "/deployments/run-java.sh" ]
+FROM icr.io/appcafe/open-liberty:kernel-slim-java25-openj9-ubi-minimal
+
+COPY --chown=1001:0 src/main/liberty/config/ /config/
+COPY --chown=1001:0 target/hello-openliberty.war /config/apps/
+
+RUN features.sh

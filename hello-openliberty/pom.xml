@@ -12,11 +12,14 @@
     <packaging>war</packaging>
 
     <properties>
-        <jakarta.jakartaee-web-api.version>8.0.0</jakarta.jakartaee-web-api.version>
-        <liberty-maven-plugin.version>3.3-M3</liberty-maven-plugin.version>
-        <maven-war-plugin.version>3.2.3</maven-war-plugin.version>
-        <microprofile.version>3.2</microprofile.version>
-        <openliberty.servlet.version>20.0.0.1</openliberty.servlet.version>
+        <maven.compiler.source>25</maven.compiler.source>
+        <maven.compiler.target>25</maven.compiler.target>
+        <maven.compiler.release>25</maven.compiler.release>
+        <jakarta.jakartaee-web-api.version>11.0.0</jakarta.jakartaee-web-api.version>
+        <liberty-maven-plugin.version>3.12.1</liberty-maven-plugin.version>
+        <maven-war-plugin.version>3.5.1</maven-war-plugin.version>
+        <microprofile.version>7.1</microprofile.version>
+        <openliberty.version>26.0.0.7</openliberty.version>
     </properties>
 
     <dependencies>
@@ -33,21 +36,23 @@
             <type>pom</type>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>io.openliberty.features</groupId>
-            <artifactId>servlet-4.0</artifactId>
-            <version>${openliberty.servlet.version}</version>
-            <type>esa</type>
-        </dependency>
     </dependencies>
+
     <build>
-        <!-- <finalName>${project.artifactId}</finalName> -->
+        <finalName>${project.artifactId}</finalName>
         <plugins>
-            <!-- Enable liberty-maven plugin -->
             <plugin>
                 <groupId>io.openliberty.tools</groupId>
                 <artifactId>liberty-maven-plugin</artifactId>
                 <version>${liberty-maven-plugin.version}</version>
+                <configuration>
+                    <runtimeArtifact>
+                        <groupId>io.openliberty</groupId>
+                        <artifactId>openliberty-kernel</artifactId>
+                        <version>${openliberty.version}</version>
+                        <type>zip</type>
+                    </runtimeArtifact>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
