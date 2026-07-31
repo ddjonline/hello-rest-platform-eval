@@ -2,9 +2,9 @@ package com.ddjonline.hello.vertx.hello;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.HttpMethod;
-import io.vertx.reactivex.core.AbstractVerticle;
-import io.vertx.reactivex.ext.web.Router;
+import io.vertx.ext.web.Router;
 
 public class MainVerticle extends AbstractVerticle {
 
@@ -20,7 +20,7 @@ public class MainVerticle extends AbstractVerticle {
             context.response().end("your slice of pi is " + pi_digits(20000));
         });
 
-        vertx.createHttpServer().requestHandler(router).rxListen(8080).subscribe();
+        vertx.createHttpServer().requestHandler(router).listen(8080);
     }
 
     private static String pi_digits(int digits) {
