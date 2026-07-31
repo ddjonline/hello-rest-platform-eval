@@ -1,73 +1,45 @@
-
 package com.ddjonline.hello.helidon.hello;
 
-import java.util.concurrent.TimeUnit;
+import io.helidon.http.Status;
+import io.helidon.webclient.http1.Http1Client;
+import io.helidon.webclient.http1.Http1ClientResponse;
+import io.helidon.webserver.http.HttpRouting;
+import io.helidon.webserver.testing.junit5.ServerTest;
+import io.helidon.webserver.testing.junit5.SetUpRoute;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import io.helidon.media.jsonp.JsonpSupport;
-import io.helidon.webclient.WebClient;
-import io.helidon.webserver.WebServer;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.startsWith;
+import static org.hamcrest.MatcherAssert.assertThat;
 
-public class MainTest {
+@ServerTest
+class MainTest {
 
-    // private static WebServer webServer;
-    // private static WebClient webClient;
+    private final Http1Client client;
 
-    // @BeforeAll
-    // public static void startTheServer() throws Exception {
-    //     webServer = Main.startServer();
+    MainTest(Http1Client client) {
+        this.client = client;
+    }
 
-    //     long timeout = 2000; // 2 seconds should be enough to start the server
-    //     long now = System.currentTimeMillis();
+    @SetUpRoute
+    static void routing(HttpRouting.Builder builder) {
+        Main.routing(builder);
+    }
 
-    //     while (!webServer.isRunning()) {
-    //         Thread.sleep(100);
-    //         if ((System.currentTimeMillis() - now) > timeout) {
-    //             Assertions.fail("Failed to start webserver");
-    //         }
-    //     }
+    @Test
+    void testHello() {
+        try (Http1ClientResponse response = client.get("/hello").request()) {
+            assertThat(response.status(), is(Status.OK_200));
+            assertThat(response.as(String.class), is("Hello (1)"));
+        }
+    }
 
-    //     webClient = WebClient.builder()
-    //             .baseUri("http://localhost:" + webServer.port())
-    //             .addMediaSupport(JsonpSupport.create())
-    //             .build();
-    // }
-
-    // @AfterAll
-    // public static void stopServer() throws Exception {
-    //     if (webServer != null) {
-    //         webServer.shutdown()
-    //                 .toCompletableFuture()
-    //                 .get(10, TimeUnit.SECONDS);
-    //     }
-    // }
-
-    // @Test
-    // public void testHelloWorld() throws Exception {
-    //     webClient.get()
-    //             .path("/hello")
-    //             .request(String.class)
-    //             .thenAccept(string -> Assertions.assertEquals("Hello (1)", string))
-    //             .toCompletableFuture()
-    //             .get();
-
-    //     webClient.get()
-    //             .path("/health")
-    //             .request()
-    //             .thenAccept(response -> Assertions.assertEquals(200, response.status().code()))
-    //             .toCompletableFuture()
-    //             .get();
-
-    //     webClient.get()
-    //             .path("/metrics")
-    //             .request()
-    //             .thenAccept(response -> Assertions.assertEquals(200, response.status().code()))
-    //             .toCompletableFuture()
-    //             .get();
-    // }
-
+    @Test
+    void testNaptime() {
+        try (Http1ClientResponse response = client.get("/naptime").request()) {
+            assertThat(response.status(), is(Status.OK_200));
+            assertThat(response.as(String.class), startsWith("your slice of pi is "));
+        }
+    }
 }

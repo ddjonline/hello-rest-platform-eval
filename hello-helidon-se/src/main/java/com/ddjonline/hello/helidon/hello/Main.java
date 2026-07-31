@@ -1,88 +1,40 @@
-
 package com.ddjonline.hello.helidon.hello;
 
-import io.helidon.common.LogConfig;
 import io.helidon.config.Config;
-import io.helidon.health.HealthSupport;
-import io.helidon.health.checks.HealthChecks;
-import io.helidon.media.jsonp.JsonpSupport;
-import io.helidon.metrics.MetricsSupport;
-import io.helidon.webserver.Routing;
+import io.helidon.logging.common.LogConfig;
 import io.helidon.webserver.WebServer;
+import io.helidon.webserver.http.HttpRouting;
 
 /**
  * The application main class.
  */
 public final class Main {
 
-    /**
-     * Cannot be instantiated.
-     */
     private Main() {
     }
 
     /**
      * Application main entry point.
+     *
      * @param args command line arguments.
      */
-    public static void main(final String[] args) {
-        startServer();
-    }
-
-    /**
-     * Start the server.
-     * @return the created {@link WebServer} instance
-     */
-    static WebServer startServer() {
-        // load logging configuration
+    public static void main(String[] args) {
         LogConfig.configureRuntime();
-
-        // By default this will pick up application.yaml from the classpath
         Config config = Config.create();
 
-        // Build server with JSONP support
-        WebServer server = WebServer.builder(createRouting(config))
+        WebServer server = WebServer.builder()
                 .config(config.get("server"))
-                .addMediaSupport(JsonpSupport.create())
-                .build();
+                .routing(Main::routing)
+                .build()
+                .start();
 
-        // Try to start the server. If successful, print some info and arrange to
-        // print a message at shutdown. If unsuccessful, print the exception.
-        server.start()
-                .thenAccept(ws -> {
-                    System.out.println(
-                            "WEB server is up! http://localhost:" + ws.port());
-                    ws.whenShutdown().thenRun(()
-                            -> System.out.println("WEB server is DOWN. Good bye!"));
-                })
-                .exceptionally(t -> {
-                    System.err.println("Startup failed: " + t.getMessage());
-                    t.printStackTrace(System.err);
-                    return null;
-                });
-
-        // Server threads are not daemon. No need to block. Just react.
-
-        return server;
+        System.out.println("WEB server is up! http://localhost:" + server.port());
     }
 
     /**
-     * Creates new {@link Routing}.
-     *
-     * @return routing configured with JSON support, a health check, and a service
-     * @param config configuration of this server
+     * Updates HTTP routing.
      */
-    private static Routing createRouting(Config config) {
-        MetricsSupport metrics = MetricsSupport.create();
-        HelloService helloService = new HelloService(config);
-        HealthSupport health = HealthSupport.builder()
-                .addLiveness(HealthChecks.healthChecks())   // Adds a convenient set of checks
-                .build();
-
-        return Routing.builder()
-                .register(health)                   // Health at "/health"
-                .register(metrics)                  // Metrics at "/metrics"
-                .register("/", helloService)
-                .build();
+    static void routing(HttpRouting.Builder routing) {
+        routing.register("/", new HelloService());
     }
 }

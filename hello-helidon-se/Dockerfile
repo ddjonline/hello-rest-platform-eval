@@ -1,6 +1,5 @@
-
 # 1st stage, build the app
-FROM maven:3.6-jdk-11 as build
+FROM maven:3.9.11-eclipse-temurin-25 AS build
 
 WORKDIR /helidon
 
@@ -18,7 +17,7 @@ RUN mvn package -DskipTests
 RUN echo "done!"
 
 # 2nd stage, build the runtime image
-FROM openjdk:11-jre-slim
+FROM eclipse-temurin:25-jre
 WORKDIR /helidon
 
 # Copy the binary built in the 1st stage
