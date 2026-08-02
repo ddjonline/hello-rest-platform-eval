@@ -1,12 +1,12 @@
 const express = require('express');
-const { sleep } = require('sleep');
+const { setTimeout: sleep } = require('node:timers/promises');
 
 const app = express();
 
 let couter = 1;
 
-function pi_monte_carlo(iterations) {
-    sleep(1);
+async function pi_monte_carlo(iterations) {
+    await sleep(1000);
     let pi = 0;
     let iterator = sequence();
 
